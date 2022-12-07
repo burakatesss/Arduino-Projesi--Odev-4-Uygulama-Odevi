@@ -1,0 +1,31 @@
+/*
+                    Algorithm and Programming I Dersi Araştırma Projesi 4 - Burak Ateş 211451001
+LDR sensörü sayesinde ortamdaki ışık miktarı ölçülerek, ölçülen ışık miktarının belirtilen referans değerinden küçük olduğu durumda ledin yanması; 
+ölçülen ışık miktarının belirtilen referans değerinden büyük olduğu durumda ledin sönmesini sağlayan kod.
+
+                                !!! Bu Kod Arduino IDE Programı ile Yazılmıştır!!!
+*/
+
+#define led 10                     //10.Pinde LED olduğunu tanımlandı
+
+void setup()                      // setup kapsamı
+ {
+  pinMode(led, OUTPUT);           //LED'in çıkış elemanı olduğunu belirtildi
+  Serial.begin(9600);             //9600 Baundluk bir seri haberleşme başlatıyoruz
+}
+
+void loop()                       // loop kapsamı
+{
+  int light = analogRead(A0);    //Light değişkeni tanımlandı. light'ı A0 pinindeki LDR ile okunacak
+  Serial.println(light);         //Okunan değeri seri iletişim ekranına yansıtacak kod
+  delay(50);                     // 50ms bekleme süresi ayarlandı
+
+  if (light > 300)              //Okunan ışık değeri 300'den büyük ise
+  { 
+    digitalWrite(led, LOW);     //yukardaki şart olduğunda LED in yanmamasını sağlayan kod
+  }
+  if (light <= 300)              //Okunan ışık değeri 300'den küçük ise
+  { 
+    digitalWrite(led, HIGH);    //yukardaki şart olduğunda LED in yanmasını sağlayan kod
+  }
+}
